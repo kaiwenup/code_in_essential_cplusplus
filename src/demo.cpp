@@ -1,7 +1,48 @@
 #include "demo.h"
 
 /**
- * stack test demo 
+ * is_elem test demo 
+ * no ok 
+ * Bug: 输入字符的时候有问题
+**/
+void is_elem_test_demo()
+{
+	char ch;
+	bool more = true;
+	
+	Triangular tri(10, 1);
+
+	tri.gen_elements( tri.length() );
+
+
+	while( more )
+	{
+		cout << "Enter value: ";
+		int ival;
+		bool is_elem;
+		cin >> ival;
+
+
+		is_elem = tri.is_elem( ival );
+		//输入字符会有问题
+
+		cout << ival << ( is_elem  ? " is " : " is not ")
+				<< "an element in Triangular series. \n"
+					<< "Another value?(Y/N):";
+
+		cin >> ch;
+
+			if( ch == 'n' || ch == 'N')
+				more = false;
+		
+
+		
+	
+	}
+}
+
+/**
+ * stack test demo
  * ok
 **/
 void stack_test_demo(vector<int> &ve )
