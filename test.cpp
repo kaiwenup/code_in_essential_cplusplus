@@ -16,7 +16,21 @@
 #include <set>
 #include <cctype>
 
+ostream&
+operator<<( ostream &os, const Triangular &rhs )
+{
+    os << "( "
+	    << rhs.beg_pos() << " , "
+	    << rhs.length()  << " ) ";
+
+    rhs.display( rhs.length(), rhs.beg_pos(), os );
+    return os;
+}
+
+
 using namespace std;
+
+
 
 int main(void)
 {
@@ -28,8 +42,16 @@ int main(void)
 	int ai[ 3 ] = {6, 7, 6};
 	vector<int> pell_seq(ai, ai+seq_size);
 
+	Triangular tri(20, 3);
 
-	is_elem_test_demo();
+	tri.gen_elements( tri.length() );
+
+	cout << tri << endl;
+	// tri.display(tri.length(), tri.beg_pos());
+
+	//iterator_class_test_demo();
+
+	//is_elem_test_demo();
 
 	//stack_test_demo( pell_seq );
 	

@@ -12,8 +12,7 @@ void is_elem_test_demo()
 	
 	Triangular tri(10, 1);
 
-	tri.gen_elements( tri.length() );
-
+	//tri.gen_elements( tri.length() );
 
 	while( more )
 	{
@@ -34,10 +33,6 @@ void is_elem_test_demo()
 
 			if( ch == 'n' || ch == 'N')
 				more = false;
-		
-
-		
-	
 	}
 }
 
@@ -64,7 +59,7 @@ void Triangular_test_demo()
     Triangular tri(3, 1);
 	Triangular tri1, tri2;
 
-	tri.display();
+	// tri.display();
 	
 	tri.push(6);
 	tri.push(2);
@@ -78,7 +73,7 @@ void Triangular_test_demo()
 	tri1.push(1);
 	tri1.push(12);
 	
-	tri1.display();
+	// tri1.display();
 
     //因为定义了 static vector<int> _elems，所以两个类的调用sum函数，结果都是一样的。
 	cout << "-1- sum of elements: "
@@ -92,4 +87,38 @@ void Matrix_test_demo()
 {
     Matrix mat(4 , 4);
 	mat.display();
+}
+
+void iterator_class_test_demo()
+{
+	Triangular tri( 30 );
+	tri.gen_elements( tri.length() );
+	/**
+	 * Triangular::iterator怎么来的？
+	 * 1. typedef Triangular_iterator Triangular::iterator
+	 * 此时Triangular::iterator与Triangular_iterator等价
+	 * 2. tri.begin()这一步调用Triangular_iterator begin() const
+	 * 此时函数返回Triangular_iterator( _beg_pos )，这一步调用
+	 * inline int Triangular_iterator::operator*() const
+	 * 返回索引值对应的数值
+	 **/
+	Triangular::iterator it = tri.begin();
+	Triangular::iterator end_it = tri.end();
+
+	cout << "Triangular Series of " << tri.length() << " elements\n";
+	// cout << tri << endl;
+
+	/**
+	 * it != end_it c++没有直接支持该语句的语法，需要自己定义iterator_class
+	 * 定义语句为：
+	 * inline bool Triangular_iterator::
+    	operator!= ( const Triangular_iterator &rhs) const
+                { return !( *this == rhs ); }
+	**/
+	while( it != end_it ){
+		cout << *it << ' ';
+		++it;
+	}
+
+	cout << endl;
 }
