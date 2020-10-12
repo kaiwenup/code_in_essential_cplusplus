@@ -122,3 +122,45 @@ void iterator_class_test_demo()
 
 	cout << endl;
 }
+
+int function_object_test_demo( const vector<int> &vec, int comp )
+{
+	LessThan lt( comp );
+
+	int count = 0;
+
+	for( int ix = 0 ; ix < vec.size(); ix++)
+	{
+		if( lt( vec[ ix ]) )
+		{
+			++count;
+		}
+	}
+
+	return count;
+}
+
+/**默认值的设定应该放在声明处（头文件），而不是定义处**/
+void print_less_than( const vector<int> &vec, int comp, ostream &os )
+{
+	LessThan lt( comp );
+	vector<int>::const_iterator iter = vec.begin();
+	vector<int>::const_iterator end_iter = vec.end();
+
+	os << "elements less than " << lt.com_val() << endl;
+
+	while(( iter = find_if(iter, end_iter, lt)) != end_iter )
+	{
+		os << *iter << endl;
+		iter++;
+	}
+}
+
+void overload_iostream_test_demo()
+{
+	Triangular tri(20, 3);
+
+	tri.gen_elements( tri.length() );
+
+	cout << tri;
+}

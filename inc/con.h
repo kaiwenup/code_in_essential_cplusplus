@@ -20,6 +20,9 @@ using namespace std;
  * 自己写的头文件放这边**/
 #include "debug_switch.h"
 
+
+
+
 /** definition of class Triangular_iterator**/
 
 class Triangular_iterator
@@ -198,6 +201,29 @@ inline Triangular_iterator Triangular_iterator::
     return tmp;
 }
 
+/**----------------------------------------------------------**/
+/** function object **/
+class LessThan
+{
+public:
+    LessThan( int val ) : _val( val ) {}
+    int com_val() const { return _val; } // 基值的读取
+    void com_val( int nval ) { _val = nval; }
+
+    bool operator()( int value ) const;
+
+
+private:
+    int _val;
+};
+
+inline bool LessThan::operator()( int value ) const 
+{ 
+    return value < _val; 
+}
+
+
+
 
 /**----------------------------------------------------------**/
 // definition of class Matrix
@@ -267,5 +293,8 @@ inline Matrix&  Matrix::operator=( const Matrix &rhs )
     return *this;
 }
 
+
+
+ostream& operator<<( ostream &os, const Triangular &rhs );
 
 #endif

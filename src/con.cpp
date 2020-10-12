@@ -98,22 +98,14 @@ void Triangular::gen_elements( int length )
 
 }
 
-// ostream& operator<<( ostream &os, const Triangular &rhs )
-// {
-//     os << "( " << rhs.beg_pos() << ", " << rhs.length() << " )";
-
-//     rhs.display( rhs.length(), rhs.beg_pos(), os);
-
-//     return os;
-// }
-
-ostream&
-operator<<( ostream &os, const Triangular &rhs )
+/**注意的头文件进行声明，不然主程序调用的时候会报错**/
+ostream& operator<<( ostream &os, const Triangular &rhs )
 {
-    os << "( "
-	    << rhs.beg_pos() << " , "
-	    << rhs.length()  << " ) ";
+    os << "( " << rhs.beg_pos() << ", " << rhs.length() << " ) ";
 
-    rhs.display( rhs.length(), rhs.beg_pos(), os );
+    rhs.display( rhs.length(), rhs.beg_pos(), os);
+
     return os;
 }
+
+

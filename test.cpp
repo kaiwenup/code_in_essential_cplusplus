@@ -24,21 +24,28 @@ using namespace std;
 int main(void)
 {	
 	int seq_size = 3;
-	int pt;
+	int pt = 8;
 	int ai[ 3 ] = {6, 7, 6};
 	vector<int> pell_seq(ai, ai+seq_size);
+
 
 	Triangular tri(20, 3);
 
 	tri.gen_elements( tri.length() );
 
-	// cout << tri << endl;
+
+
+	/**  Chapter 4 test demo **/
+	
+	overload_iostream_test_demo();
+
+	// print_less_than( pell_seq, pt);
 	
 	// tri.display(tri.length(), tri.beg_pos());
 
-	//iterator_class_test_demo();
+	// iterator_class_test_demo();
 
-	//is_elem_test_demo();
+	// is_elem_test_demo();
 
 	//stack_test_demo( pell_seq );
 	
