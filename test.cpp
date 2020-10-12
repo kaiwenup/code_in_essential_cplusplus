@@ -2,6 +2,7 @@
 #include "inc/con.h"
 #include "inc/function.h"
 #include "inc/demo.h"
+#include "inc/chapter5.h"
 
 #include <iostream>
 #include <string>
@@ -33,11 +34,14 @@ int main(void)
 
 	tri.gen_elements( tri.length() );
 
+	/**  Chapter 5 test demo **/
+
+	three_tier_class_test_demo();
 
 
 	/**  Chapter 4 test demo **/
 	
-	overload_iostream_test_demo();
+	// overload_iostream_test_demo();
 
 	// print_less_than( pell_seq, pt);
 	

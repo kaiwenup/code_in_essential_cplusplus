@@ -1,5 +1,7 @@
 #include "demo.h"
 
+
+/**chapter4 test demo**/
 /**
  * is_elem test demo 
  * no ok 
@@ -163,4 +165,25 @@ void overload_iostream_test_demo()
 	tri.gen_elements( tri.length() );
 
 	cout << tri;
+}
+
+/**chapter5 test demo**/
+/**5.1 漫游：面向对象编程思维**/ 
+void three_tier_class_test_demo()
+{
+	// cout << "\n" << "Creating a LibMat object to print()\n";
+
+	// LibMat libmat;
+
+	// print( libmat );
+
+	// cout << "Creating a Book object to print() \n";
+	// Book b( "The Catle", "Franz Kafka");
+	// print( b );
+
+	AudioBook ab("Mason and Dixon", "Thomas Pynchon", "Edwin Leonard");
+
+	cout << "The title is: " << ab.title() << '\n'
+		<< "The author is: " << ab.author() << '\n'
+		<< "The narrator is: " << ab.narrator() << endl;
 }

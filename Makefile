@@ -38,7 +38,9 @@ $(OBJ)/con.o:$(SRC)/con.cpp
 $(OBJ)/stack.o:$(SRC)/stack.cpp
 	$(CC) $(CFLAGS) -o $@ -c $(SRC)/stack.cpp
 $(OBJ)/demo.o:$(SRC)/demo.cpp
-	$(CC) $(CFLAGS) -o $@ -c $(SRC)/demo.cpp	
+	$(CC) $(CFLAGS) -o $@ -c $(SRC)/demo.cpp
+$(OBJ)/chapter5.o:$(SRC)/chapter5.cpp
+	$(CC) $(CFLAGS) -o $@ -c $(SRC)/chapter5.cpp
 $(OBJ)/test.o: ./test.cpp 
 	$(CC) $(CFLAGS) -o $@ -c test.cpp 
 
