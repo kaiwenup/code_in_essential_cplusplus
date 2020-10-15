@@ -30,13 +30,23 @@ int main(void)
 	vector<int> pell_seq(ai, ai+seq_size);
 
 
-	Triangular tri(20, 3);
+	// Triangular tri(20, 3);
 
-	tri.gen_elements( tri.length() );
+	// tri.gen_elements( tri.length() );
+
+	num_sequence ns;
+	const int pos = 8;
+
+	for( int ix = 1; ix < ns.num_of_sequence(); ++ix )
+	{
+		ns.set_sequence( ns.nstype( ix ));
+		// int elem_val = ns.elem( pos );
+		display(ns, pos);
+	}
 
 	/**  Chapter 5 test demo **/
 
-	three_tier_class_test_demo();
+	// three_tier_class_test_demo();
 
 
 	/**  Chapter 4 test demo **/
