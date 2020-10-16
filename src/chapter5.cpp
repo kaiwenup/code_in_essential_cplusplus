@@ -1,8 +1,5 @@
 #include "chapter5.h"
 
-
-
-
 /**definition of non-member function print()**/
 void print( const LibMat &mat )
 {
@@ -11,7 +8,7 @@ void print( const LibMat &mat )
     mat.print();
 
 }
-
+/**definition of class num_sequence*******************************************/
 const int num_sequence::num_seq;
 vector<vector<int> > num_sequence::seq( num_seq );
 
@@ -22,6 +19,15 @@ num_sequence::PtrType num_sequence::func_tbl[ num_seq ] =
     &num_sequence::triangular,
     &num_sequence::lucas
 };
+
+num_sequence::ns_type num_sequence::nstype( int num )  // 校验其整数参数是否代表某一个有效数列
+    {
+        /**注意手法**/
+        
+        return num <= 0 || num >= num_seq  
+            ? ns_unset // 无效值
+            : static_cast< ns_type >( num );
+    }
 
 void num_sequence::set_sequence( ns_type nst )
 {
@@ -51,24 +57,39 @@ void num_sequence::set_sequence( ns_type nst )
     }
 }
 
-const char* num_sequence::what_am_i() const
+bool num_sequence::
+check_integrity( int pos ) 
 {
-    static char *names[ num_seq ] = {
-        // (char*)"notSet", (char*)"pell", (char*)"lucas", (char*)"triangular" 
-        (char*)"notSet", (char*)"pell", (char*)"triangular", (char*)"lucas"  
-    };
+	bool status = true;
 
-    return names[ _isa ];
+	if ( pos <= 0 || pos > _max_elems ){
+		 cerr << "!! invalid position: " << pos
+			  << " Cannot honor request\n";
+		 status = false;
+	}
+    else if ( pos > (*_elem).size() )
+		    (this->*_pmf)( pos );
+            /**错误写法：(*_pmf)( pos ); 
+             * 注意与(*_elem)区别**/
+
+	return status;
 }
 
 int num_sequence::elem( int pos )
 {
     if( ! check_integrity( pos ))
         return 0;
-    
-    // if( pos > _elem->size() )
-        // (this->*_pmf)( pos );
+
     return (*_elem)[ pos-1 ];
+}
+
+const char* num_sequence::what_am_i() const
+{
+    static char *names[ num_seq ] = { 
+        (char*)"notSet", (char*)"pell", (char*)"triangular", (char*)"lucas"  
+    };
+
+    return names[ _isa ];
 }
 
 
@@ -125,10 +146,17 @@ void num_sequence::triangular( int pos )
 	{
 		int end_pos = pos+1;
 		int ix = (*_elem).size()+1;
-		// cout << "tri: ix: " << ix << " pos: " << pos << endl;
 		for ( ; ix <= end_pos; ++ix )
 			  (*_elem).push_back( ix*(ix+1)/2 );
 	}
 }
 
 
+void display(  num_sequence &ns, int pos, ostream &os)
+{
+    os << "The elements at position "
+        << pos << " for the "
+        << ns.what_am_i() << " sequence is "
+        << ns.elem( pos ) 
+        << endl;
+}

@@ -84,46 +84,27 @@ void print( const LibMat &mat );
 
 class num_sequence{
 public:
-    typedef void (num_sequence::*PtrType)( int );
+    typedef void (num_sequence::*PtrType)( int ); // 注意此处的定义
+
+    enum ns_type{
+        ns_unset, ns_pell, ns_triangular, ns_lucas
+    };
 
     /** _pmf可以指向下列任意一个函数**/
     void pell( int );
     void triangular( int );
     void lucas( int );
+    /*****************************/
 
-    
-
-    enum ns_type{
-        // ns_unset, ns_pell, ns_lucas, ns_triangular
-        ns_unset, ns_pell, ns_triangular, ns_lucas
-    };
-
-    ns_type nstype( int num )  // 校验其整数参数是否代表某一个有效数列
-    {
-        /**高级写法**/
-        return num <= 0 || num >= num_seq  
-            ? ns_unset // 无效值
-            : static_cast< ns_type >( num );
-        /**初级写法**/
-        // if( num <= 0 || num >= num_seq )
-        //     return ns_unset;
-        // else if( num == 1)
-        //     return ns_pell;
-        // else if( num == 2)
-        //     return ns_triangular;
-        // else if( num == 3)
-        //     return ns_lucas;
-        
-    }
-
-    int num_of_sequence() const { return num_seq; }
-
-    static  int max_elems() { return _max_elems; }
-
-    const char* what_am_i() const;
     int elem( int pos);
     bool check_integrity( int pos ) ;
     void set_sequence( ns_type nst );
+    const char* what_am_i() const;
+    ns_type nstype( int num );  // 校验其整数参数是否代表某一个有效数列
+    
+    int num_of_sequence() const { return num_seq; }
+    static int max_elems() { return _max_elems; }
+    
 
 private:
     PtrType _pmf; // 指向目前所用的算法（用以计算数列）
@@ -137,32 +118,9 @@ private:
    
 };
 
-inline bool num_sequence::
-check_integrity( int pos ) 
-{
-	bool status = true;
 
-	if ( pos <= 0 || pos > _max_elems ){
-		 cerr << "!! invalid position: " << pos
-			  << " Cannot honor request\n";
-		 status = false;
-	}
-    else if ( pos > (*_elem).size() )
-		    (this->*_pmf)( pos );
+/**Statement*************************************************************8*/
 
-	return status;
-}
-
-
-
-inline void display(  num_sequence &ns, int pos, ostream &os=cout)
-{
-    os << "The elements at position "
-        << pos << " for the "
-        << ns.what_am_i() << " sequence is "
-        << ns.elem( pos ) // 若num_sequence只读会报错
-        << endl;
-}
-
+void display(  num_sequence &ns, int pos, ostream &os=cout);
 
 #endif
