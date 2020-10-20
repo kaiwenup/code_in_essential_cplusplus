@@ -34,20 +34,27 @@ int main(void)
 
 	// tri.gen_elements( tri.length() );
 
-	num_sequence ns;
-	const int pos = 8;
-
-	for( int ix = 1; ix < ns.num_of_sequence(); ++ix )
-	{
-		ns.set_sequence( ns.nstype( ix ));
-		// int elem_val = ns.elem( pos );
-		display(ns, pos);
-	}
+	
 
 	/**  Chapter 5 test demo **/
+	Triangulars tri;
+
+	cout << "tri: beginning at element 1 for 1 element:"
+		<< tri << endl;
+	
+	Triangulars tri2(16);
+	cout << "tri: beginning at element 1 for 16 element:"
+		<< tri2 << endl;
+	
+	Triangulars tri3(8, 12);
+	cout << "tri: beginning at element 12 for 8 element:"
+		<< tri3 << endl;
+
+
 
 	// three_tier_class_test_demo();
 
+	// num_sequence_test_demo();
 
 	/**  Chapter 4 test demo **/
 	

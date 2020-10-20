@@ -1,5 +1,18 @@
 #include "demo.h"
 
+/**chapter5 test demo**/
+void num_sequence_test_demo()
+{
+	num_sequence ns;
+	const int pos = 8;
+
+	for( int ix = 1; ix < ns.num_of_sequence(); ++ix )
+	{
+		ns.set_sequence( ns.nstype( ix ));
+		// int elem_val = ns.elem( pos );
+		display(ns, pos);
+	}
+}
 
 /**chapter4 test demo**/
 /**

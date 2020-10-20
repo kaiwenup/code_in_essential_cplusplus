@@ -1,11 +1,13 @@
 #ifndef _CHAPTER5_H_
 #define _CHAPTER5_H_
-#include "con.h"
+// #include "con.h"
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm> 
+
+using namespace std;
 
 /**三层的类体系
  * ************************************************************************
@@ -79,8 +81,52 @@ protected:
 };
 
 void print( const LibMat &mat );
+/**definition of class num_sequence**************************************************************/
 
-/************************************************************************/
+
+
+class new_num_sequence{
+public:
+    // virtual ~num_sequence(){};
+    /**基类的虚函数需要置零，不然会报错**/
+    virtual int elem( int pos ) const =0 ;  // 返回pos位置上的元素
+    virtual const char* what_am_i() const = 0;//返回确切的数列类型
+    virtual ostream& print( ostream &os = cout ) const = 0 ; //将所有元素写入os
+    static int max_elems() { return _max_elems; } //返回所支持的最大位置值
+
+protected:
+    virtual void gen_elems( int pos ) const = 0;  //产生直到pos位置的所有元素
+    bool check_integrity( int pos, int size ) const; //检查pos是否为有效位置
+
+    const static int _max_elems = 1024;
+
+};
+
+class Triangulars : public new_num_sequence{
+public:
+    Triangulars( int len = 1, int beg_pos = 1)
+        : _length( len ), _beg_pos( beg_pos){}
+
+    virtual int elem( int pos) const ; // 不默认为0会报错undefined reference to `typeinfo for new_num_sequence'
+    virtual const char* what_am_i() const { return "Triangular"; }
+    virtual ostream& print( ostream &os = cout ) const;
+    int length() const { return _length; }
+    int beg_pos() const { return _beg_pos; }
+        
+protected:
+    // virtual void gen_elems( int pos ) const = 0;
+    virtual void gen_elems( int pos ) const;
+    int _length;
+    int _beg_pos;
+    static vector<int> _elems;  
+    /**主要在头文件再次进行声明，
+     * 不然报错chapter5.cpp:(.text+0xc4): undefined reference to `Triangulars::_elems'
+     * **/
+};
+
+
+ostream& operator<<( ostream &os, const new_num_sequence &ns );
+/**definition of class num_sequence**************************************************************/
 
 class num_sequence{
 public:
@@ -119,7 +165,7 @@ private:
 };
 
 
-/**Statement*************************************************************8*/
+/**Statement**************************************************************/
 
 void display(  num_sequence &ns, int pos, ostream &os=cout);
 

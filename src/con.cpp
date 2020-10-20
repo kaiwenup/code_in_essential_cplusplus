@@ -70,7 +70,6 @@ Triangular::gen_elems_to_value( int value)
     {
         ++ix;
         _elems.push_back( ix*(ix+1)/2 );
-        if( DEBUG_CON )
             cout << "elems to value: " << ix*(ix+1)/2 << endl;
     }
 

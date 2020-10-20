@@ -8,6 +8,102 @@ void print( const LibMat &mat )
     mat.print();
 
 }
+
+
+
+/**definition of class new_num_sequence***************************************/
+vector<int> Triangulars::_elems;
+
+bool new_num_sequence::check_integrity( int pos, int size ) const
+{
+    if( pos < 0 || pos > _max_elems)
+    {
+        cerr << "!! invalid position: " << pos
+             << " Cannot honor request\n";
+
+        return false;
+    }
+
+    if( pos > size )
+        gen_elems( pos );  
+
+    return true;
+}
+
+int Triangulars::elem( int pos ) const 
+{
+    if( ! check_integrity( pos, _elems.size() ))
+        return 0;
+    
+    if( pos > _elems.size() )
+        gen_elems( pos );
+
+    return _elems[ pos-1 ];
+}
+
+void Triangulars::gen_elems( int pos ) const
+{
+    // if ( pos <= 0 || pos > _max_elems )
+	// 	 return;
+
+    // if ( _elems.size() <= pos )
+	// {
+	// 	int end_pos = pos+1;
+	// 	int ix = _elems.size()+1;
+	// 	for ( ; ix <= end_pos; ++ix )
+	// 		  _elems.push_back( ix*(ix+1)/2 );
+	// }
+
+    if ( pos <= 0 || pos > max_elems() )
+		 return;
+
+    if ( _elems.size() <= pos )
+	{
+		int end_pos = pos+1;
+		int ix = _elems.size() + 1;
+		cout << "tri: ix: " << ix << " pos: " << pos << endl;
+		for ( ; ix <= end_pos; ++ix )
+		    _elems.push_back( ix*(ix+1)/2 );
+	}
+}
+
+ostream& Triangulars::print( ostream &os) const 
+{
+    // int elem_pos = _beg_pos-1;
+    // int end_pos = elem_pos+_length;
+
+    // if( end_pos > _elems.size() )
+    //     Triangulars::gen_elems( end_pos );
+    
+    // while( elem_pos < end_pos )
+    //     os << _elems[ elem_pos++ ] << ' ';
+
+    // return os;
+
+    int elem_pos = _beg_pos-1;
+	int end_pos = elem_pos + _length;
+
+    if ( ! check_integrity( end_pos, _elems.size() ))
+			 return os;
+
+     os << "( "
+	    << _beg_pos << " , "
+	    << _length << " ) ";
+   
+	while ( elem_pos < end_pos )
+		     os << _elems[ elem_pos++ ] << ' ';
+
+	return os;
+}
+
+ostream& operator<<( ostream &os, const new_num_sequence &ns )
+        { return ns.print( os ); }
+
+
+
+
+
+
 /**definition of class num_sequence*******************************************/
 const int num_sequence::num_seq;
 vector<vector<int> > num_sequence::seq( num_seq );
@@ -23,7 +119,6 @@ num_sequence::PtrType num_sequence::func_tbl[ num_seq ] =
 num_sequence::ns_type num_sequence::nstype( int num )  // 校验其整数参数是否代表某一个有效数列
     {
         /**注意手法**/
-        
         return num <= 0 || num >= num_seq  
             ? ns_unset // 无效值
             : static_cast< ns_type >( num );
