@@ -17,10 +17,7 @@
 #include <set>
 #include <cctype>
 
-
 using namespace std;
-
-
 
 int main(void)
 {	
@@ -37,24 +34,12 @@ int main(void)
 	
 
 	/**  Chapter 5 test demo **/
-	Triangulars tri;
-
-	cout << "tri: beginning at element 1 for 1 element:"
-		<< tri << endl;
-	
-	Triangulars tri2(16);
-	cout << "tri: beginning at element 1 for 16 element:"
-		<< tri2 << endl;
-	
-	Triangulars tri3(8, 12);
-	cout << "tri: beginning at element 12 for 8 element:"
-		<< tri3 << endl;
-
-
 
 	// three_tier_class_test_demo();
 
 	// num_sequence_test_demo();
+
+	new_sequence_test_demo();
 
 	/**  Chapter 4 test demo **/
 	
@@ -68,7 +53,7 @@ int main(void)
 
 	// is_elem_test_demo();
 
-	//stack_test_demo( pell_seq );
+	// stack_test_demo( pell_seq );
 	
 	//Triangular_test_demo();
 

@@ -19,5 +19,6 @@ void overload_iostream_test_demo();
 /** chapter 5 **/
 void three_tier_class_test_demo();
 void num_sequence_test_demo();
+void new_sequence_test_demo();
 
 #endif

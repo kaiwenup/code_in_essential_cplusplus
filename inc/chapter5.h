@@ -87,42 +87,85 @@ void print( const LibMat &mat );
 
 class new_num_sequence{
 public:
-    // virtual ~num_sequence(){};
-    /**基类的虚函数需要置零，不然会报错**/
-    virtual int elem( int pos ) const =0 ;  // 返回pos位置上的元素
+    virtual ~new_num_sequence() {}
+    /**virtual const char* what_am_i() const = 0:
+     * 此类为纯虚函数，后面赋值为零，即在基类没有此函数的定义，在派生类中才进行定义
+     * virtual int elem( int pos ) const：
+     * 此类为虚函数，在基类就已经有定义，若强制置零，但是派生类没有此函数的定义会报错**/
     virtual const char* what_am_i() const = 0;//返回确切的数列类型
-    virtual ostream& print( ostream &os = cout ) const = 0 ; //将所有元素写入os
+    virtual int elem( int pos ) const ;  // 返回pos位置上的元素
+    virtual ostream& print( ostream &os = cout ) const ; //将所有元素写入os
+
+    int length() const { return _length; }
+    int beg_pos() const { return _beg_pos; }
     static int max_elems() { return _max_elems; } //返回所支持的最大位置值
 
 protected:
     virtual void gen_elems( int pos ) const = 0;  //产生直到pos位置的所有元素
     bool check_integrity( int pos, int size ) const; //检查pos是否为有效位置
 
+    new_num_sequence( int len, int bp, vector<int> &re )
+        : _length( len ), _beg_pos( bp ), _relems( re ){}
+
     const static int _max_elems = 1024;
+
+    int _length;
+    int _beg_pos;
+    vector<int> &_relems;
 
 };
 
 class Triangulars : public new_num_sequence{
 public:
-    Triangulars( int len = 1, int beg_pos = 1)
-        : _length( len ), _beg_pos( beg_pos){}
+    Triangulars( int len = 1, int beg_pos = 1);
 
-    virtual int elem( int pos) const ; // 不默认为0会报错undefined reference to `typeinfo for new_num_sequence'
     virtual const char* what_am_i() const { return "Triangular"; }
-    virtual ostream& print( ostream &os = cout ) const;
-    int length() const { return _length; }
-    int beg_pos() const { return _beg_pos; }
+
+
         
 protected:
-    // virtual void gen_elems( int pos ) const = 0;
     virtual void gen_elems( int pos ) const;
-    int _length;
-    int _beg_pos;
+    static vector<int> _elems;  
+    /**！！！还要在头文件再次进行声明，
+     * 不然报错chapter5.cpp:(.text+0xc4): undefined reference to `Triangulars::_elems'
+     * **/
+};
+
+inline Triangulars::Triangulars( int len, int beg_pos )
+    : new_num_sequence( len, beg_pos, _elems ) {}
+
+
+class Pell : public new_num_sequence{
+public:
+    Pell( int len = 1, int beg_pos = 1);
+    virtual const char* what_am_i() const { return "Pell"; }
+        
+protected:
+    virtual void gen_elems( int pos ) const;
     static vector<int> _elems;  
     /**主要在头文件再次进行声明，
      * 不然报错chapter5.cpp:(.text+0xc4): undefined reference to `Triangulars::_elems'
      * **/
 };
+
+inline Pell::Pell( int len, int beg_pos )
+    : new_num_sequence( len, beg_pos, _elems ) {}
+
+class Lucas : public new_num_sequence{
+public:
+    Lucas( int len = 1, int beg_pos = 1);
+    virtual const char* what_am_i() const { return "Lucas"; }
+
+protected:
+    virtual void gen_elems( int pos ) const;
+    static vector<int> _elems;  
+    /**主要在头文件再次进行声明，
+     * 不然报错chapter5.cpp:(.text+0xc4): undefined reference to `Triangulars::_elems'
+     * **/
+};
+
+inline Lucas::Lucas( int len, int beg_pos )
+    : new_num_sequence( len, beg_pos, _elems ) {}
 
 
 ostream& operator<<( ostream &os, const new_num_sequence &ns );
