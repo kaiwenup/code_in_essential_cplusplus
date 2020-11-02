@@ -37,3 +37,10 @@ Version 2.3.X
 - 5.7 基类应该多么抽象
 - 5.8 初始化、析构、复制
 - 5.9 在派生类中定义一个虚函数
+
+## Version 3.X.X
+
+- 6.1 被参数化的模型
+- 6.2 Class Template 的定义
+- 6.3 Template 类型参数的处理
+- 6.4 实现一个Class Template 

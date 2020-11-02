@@ -3,6 +3,7 @@
 #include "inc/function.h"
 #include "inc/demo.h"
 #include "inc/chapter5.h"
+#include "inc/chapter6.h"
 
 #include <iostream>
 #include <string>
@@ -27,6 +28,19 @@ int main(void)
 	vector<int> pell_seq(ai, ai+seq_size);
 
 
+	BinaryTree<string> bt;
+    bt.insert( "Piglet" );
+    bt.insert( "Eeyore" );
+	bt.insert( "Roo" );
+	bt.insert( "Tigger" );
+	bt.insert( "Chris" );
+	bt.insert( "Pooh" );
+	bt.insert( "Kanga" );
+
+	bt.preorder();
+
+	cout << endl;
+
 	// Triangular tri(20, 3);
 
 	// tri.gen_elements( tri.length() );
@@ -39,7 +53,7 @@ int main(void)
 
 	// num_sequence_test_demo();
 
-	new_sequence_test_demo();
+	// new_sequence_test_demo();
 
 	/**  Chapter 4 test demo **/
 	

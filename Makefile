@@ -31,6 +31,8 @@ $(BIN_TARGET):$(OBJECT)
 #	$(CC) $(CFLAGS) -o $@ -c $(SRC)/stack.cpp
 #$(OBJ)/con.o:$(SRC)/con.cpp
 #	$(CC) $(CFLAGS) -o $@ -c $(SRC)/con.cpp
+$(OBJ)/chapter6.o:$(SRC)/chapter6.cpp
+	$(CC) $(CFLAGS) -o $@ -c $(SRC)/chapter6.cpp
 $(OBJ)/function.o:$(SRC)/function.cpp
 	$(CC) $(CFLAGS) -o $@ -c $(SRC)/function.cpp
 $(OBJ)/con.o:$(SRC)/con.cpp
@@ -41,6 +43,7 @@ $(OBJ)/demo.o:$(SRC)/demo.cpp
 	$(CC) $(CFLAGS) -o $@ -c $(SRC)/demo.cpp
 $(OBJ)/chapter5.o:$(SRC)/chapter5.cpp
 	$(CC) $(CFLAGS) -o $@ -c $(SRC)/chapter5.cpp
+
 $(OBJ)/test.o: ./test.cpp 
 	$(CC) $(CFLAGS) -o $@ -c test.cpp 
 
