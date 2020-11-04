@@ -5,6 +5,7 @@
 #include "function.h"
 #include "stack.h"
 #include "chapter5.h"
+#include "chapter6.h"
 
 /** chapter 4 **/
 void is_elem_test_demo();
@@ -20,5 +21,8 @@ void overload_iostream_test_demo();
 void three_tier_class_test_demo();
 void num_sequence_test_demo();
 void new_sequence_test_demo();
+
+/**chapter 6**/
+void binary_template_test_demo();
 
 #endif

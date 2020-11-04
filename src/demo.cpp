@@ -1,4 +1,32 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm> 
+
 #include "demo.h"
+
+
+
+/**chapter 6 test demo**/
+void binary_template_test_demo()
+{
+	BinaryTree<string> bt;
+    bt.insert( "Piglet" );
+    bt.insert( "Eeyore" );
+	bt.insert( "Roo" );
+	bt.insert( "Tigger" );
+	bt.insert( "Chris" );
+	bt.insert( "Chris" );
+	bt.insert( "Pooh" );
+	bt.insert( "Kanga" );
+
+	bt.current_os(); 
+	// bt.preorder();
+	// cout << endl;
+	cout << bt << endl;
+
+	
+}
 
 /**chapter5 test demo**/
 /**5.1 漫游：面向对象编程思维**/ 

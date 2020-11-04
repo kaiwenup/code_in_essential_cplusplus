@@ -28,24 +28,33 @@ int main(void)
 	vector<int> pell_seq(ai, ai+seq_size);
 
 
-	BinaryTree<string> bt;
-    bt.insert( "Piglet" );
-    bt.insert( "Eeyore" );
-	bt.insert( "Roo" );
-	bt.insert( "Tigger" );
-	bt.insert( "Chris" );
-	bt.insert( "Pooh" );
-	bt.insert( "Kanga" );
+		// New_LessThan<int> lti(1024);
 
-	bt.preorder();
+		// cout << lti(10097) << endl;
 
-	cout << endl;
+		// LessThanPred<string, StringLen> ltps("Pooh");
+
+		// cout << ltps.val()  << endl;
+
+		// cout << lti(10097) << endl;
+
+		// LessThanPred<string, StringLen> ltps("Pooh");
+		// cout << ltps.val() << endl;
+		// cout << ltps("hh") << endl;
+		
+
+
+
+
+
+
 
 	// Triangular tri(20, 3);
 
 	// tri.gen_elements( tri.length() );
 
-	
+	/**  Chapter 6 test demo **/
+	binary_template_test_demo();
 
 	/**  Chapter 5 test demo **/
 

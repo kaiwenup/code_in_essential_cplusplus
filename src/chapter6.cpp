@@ -1,6 +1,9 @@
 #include "chapter6.h"
 
 
+// template<typename elemType>
+// static ostream BinaryTree<elemType>::*_current_os;
+/**函数只能目前只能定义在头文件，定义在cpp文件会报错**/
 // template< typename valType>
 // void BTnode<valType>::insert_value( const valType &val)
 // {

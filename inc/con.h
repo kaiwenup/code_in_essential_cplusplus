@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <algorithm> 
+#include <functional>
 
 /**！！！ class类的定义以及内联（inline）函数可以放在头文件中，但是类内成员函数的定头文件定义
  *接放在头文件会报错，应该放在同名.cpp文件之中
@@ -221,7 +222,44 @@ inline bool LessThan::operator()( int value ) const
     return value < _val; 
 }
 
+template<typename elemType>
+class New_LessThan
+{
+public:
+    New_LessThan( const elemType val ) : _val( val ) {}
+    elemType val() const { return _val; }
+    void val( const elemType val) { _val = val; }
 
+    bool operator() ( const elemType val ) { return val < _val; }
+
+private:
+    elemType _val;
+
+};
+
+template<typename elemType, typename Comp = less<elemType> >
+class LessThanPred{
+public:
+    LessThanPred( const elemType &val ) :_val( val ) {}
+
+    /**注意这里Comp的使用方法:注意是Comp()而不是Comp**/
+    bool operator() ( const elemType &val ) const
+                    { return Comp()( val, _val ); }
+
+    void val( const elemType &newval ) { _val = newval; }
+    elemType val() const { return _val; }
+
+private:
+    elemType _val;
+
+};
+
+
+class StringLen{
+public:
+    bool operator() ( const string &s1, const string &s2 )
+                    { return s1.size() < s2.size(); }
+};
 
 
 /**----------------------------------------------------------**/

@@ -44,3 +44,5 @@ Version 2.3.X
 - 6.2 Class Template 的定义
 - 6.3 Template 类型参数的处理
 - 6.4 实现一个Class Template 
+- 6.5 一个以Function Template 完成的Output运算符
+- 6.7 以Template参数作为一种设计策略
