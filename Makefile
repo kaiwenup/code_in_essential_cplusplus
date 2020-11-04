@@ -11,43 +11,23 @@ OBJ = ./obj
  
 
 
-#设置最后目标文件
+# 设置最后目标文件
  TARGET = test
  BIN_TARGET = $(BIN)/$(TARGET)
  
  CC = g++ 
  CFLAGS = -std=gnu++0x   -I$(INC)
  
-#用所有中间文件生成目的文件，规则中可以用 $^替换掉 ${OBJECT}
+# 生成最后的可执行文件
 $(BIN_TARGET):$(OBJECT)
 	$(CC)  -o $@ $(OBJECT)
- 
-#生成各个中间文件
- #${OBJ}/%.o:${SRC}/%.c 
-#$(OBJ)/%.o:$(SRC)/%.cpp
-#$(OBJ)/%.o:$(SOURCE) 
-#	$(CC) $(CFLAGS) -o $@ -c $<
-#$(OBJ)/stack.o:$(SRC)/stack.cpp
-#	$(CC) $(CFLAGS) -o $@ -c $(SRC)/stack.cpp
-#$(OBJ)/con.o:$(SRC)/con.cpp
-#	$(CC) $(CFLAGS) -o $@ -c $(SRC)/con.cpp
-$(OBJ)/chapter6.o:$(SRC)/chapter6.cpp
-	$(CC) $(CFLAGS) -o $@ -c $(SRC)/chapter6.cpp
-$(OBJ)/function.o:$(SRC)/function.cpp
-	$(CC) $(CFLAGS) -o $@ -c $(SRC)/function.cpp
-$(OBJ)/con.o:$(SRC)/con.cpp
-	$(CC) $(CFLAGS) -o $@ -c $(SRC)/con.cpp	
-$(OBJ)/stack.o:$(SRC)/stack.cpp
-	$(CC) $(CFLAGS) -o $@ -c $(SRC)/stack.cpp
-$(OBJ)/demo.o:$(SRC)/demo.cpp
-	$(CC) $(CFLAGS) -o $@ -c $(SRC)/demo.cpp
-$(OBJ)/chapter5.o:$(SRC)/chapter5.cpp
-	$(CC) $(CFLAGS) -o $@ -c $(SRC)/chapter5.cpp
 
+# 各文件单独编译
+$(OBJ)/%.o :$(SRC)/%.cpp  
+	$(CC) $(CFLAGS)  -c $< -o $@ 
 $(OBJ)/test.o: ./test.cpp 
 	$(CC) $(CFLAGS) -o $@ -c test.cpp 
 
- 
  
  .PHONY:clean
  clean:

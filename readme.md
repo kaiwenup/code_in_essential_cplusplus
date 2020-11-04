@@ -46,3 +46,6 @@ Version 2.3.X
 - 6.4 实现一个Class Template 
 - 6.5 一个以Function Template 完成的Output运算符
 - 6.7 以Template参数作为一种设计策略
+
+### Version 3.2.0
+- 简化了Makefile，能够自动将新添加进`src`文件夹下的cpp文件进行编译，而无需每次对Makefile文件进行修改
